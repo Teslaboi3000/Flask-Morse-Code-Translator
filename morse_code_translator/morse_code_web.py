@@ -1,5 +1,4 @@
 from flask import Flask, request
-from flask import render_template
 
 alphabet_to_morse = {
     'a': '.-', 'b': '-...', 'c': '-.-.', 'd': '-..', 'e': '.', 'f': '..-.', 'g': '--.', 'h': '....', 'i': '..', 'j': '.---',
@@ -38,6 +37,7 @@ def translate_to_text(morse_code):
 
 
 @app.route("/", methods=['GET', 'POST'])
+
 def morse_translation():
     if request.method == 'POST':
         input_text = request.form['input']
@@ -55,7 +55,7 @@ def morse_translation():
             <p>{}</p>    
         """.format(input_text, output)
     return """
-    <h1>Welcome to Morse Code Translator!</h1>
+    <h1>Welcome to Maxjustuniversal's and Teslaboi's Morse Code Translator!<h1>
     <form method="post">
         <label for="input">Enter text or Morse code:</label><br>
         <input type="text" id="input" name="input"><br>
