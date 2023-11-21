@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 alphabet_to_morse = {
     'a': '.-', 'b': '-...', 'c': '-.-.', 'd': '-..', 'e': '.', 'f': '..-.', 'g': '--.', 'h': '....', 'i': '..', 'j': '.---',
@@ -34,34 +34,17 @@ def translate_to_text(morse_code):
         output += ' '
     return output.strip()
 
-
-
 @app.route("/", methods=['GET', 'POST'])
 
-def morse_translation():
+def index():
     if request.method == 'POST':
-        input_text = request.form['input']
+        input_text = request.form.get('input', '')  
         if '-' in input_text or '.' in input_text:
-            output = translate_to_text(input_text)
+            dynamic_data = translate_to_text(input_text)
         else:
-            output = translate_to_morse(input_text)
-        return """
-            <h1>Welcome to Maxjustuniversal's and Teslaboi's Morse Code Translator!<h1>
-            <form method="post">
-            <label for="input">Enter text or Morse code:</label><br>
-            <input type="text" id="input" name="input" value="{}"><br>
-            <input type="submit" value="Translate">
-            </form>
-            <p>{}</p>    
-        """.format(input_text, output)
-    return """
-    <h1>Welcome to Maxjustuniversal's and Teslaboi's Morse Code Translator!<h1>
-    <form method="post">
-        <label for="input">Enter text or Morse code:</label><br>
-        <input type="text" id="input" name="input"><br>
-        <input type="submit" value="Translate">
-    </form>
-    """
+            dynamic_data = translate_to_morse(input_text)
+        return render_template("index.html", dynamic_data=dynamic_data) 
+    return render_template("index.html", dynamic_data="")
 
 if __name__ == "__main__":
     app.run()
