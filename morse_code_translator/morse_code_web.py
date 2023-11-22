@@ -55,7 +55,7 @@ def morse_translation():
             <p>{}</p>    
         """.format(input_text, output)
     return """
-    <h1>Welcome to Morse Code Translator!</h1>
+    <h1>Welcome to Maxjustuniversal's and Teslaboi's Morse Code Translator!<h1>
     <form method="post">
         <label for="input">Enter text or Morse code:</label><br>
         <input type="text" id="input" name="input"><br>
